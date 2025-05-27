@@ -54,7 +54,7 @@ function randomDelay(min = 500, max = 2000) {
   await randomDelay();
 
   // 2. Go to search page
-  await page.goto("https://www.cakeresume.com/jobs?query=English");
+  await page.goto("https://www.cakeresume.com/jobs?query=Software%20Engineer");
   await randomDelay();
 
   await page.mouse.wheel(0, 3000);
