@@ -99,20 +99,44 @@ function randomDelay(min = 500, max = 2000) {
       await sleep(7000);
       console.log("🆕 New apply tab opened");
 
-      // Final confirmation button (Submit or Apply)
       try {
         // Step 1: Click “Upload PDF”
-        const uploadButton = applyPage.locator('div:has-text("Upload PDF")');
-        await uploadButton.click();
+        const uploadButton = applyPage
+          .locator("div.JobApplicationForm_resumeTypeOption__b_UdE")
+          .filter({ hasText: "Upload PDF" });
 
-        // Step 2 & 3: Upload file
-        const fileInput = applyPage.locator(
-          'input[type="file"][accept="application/pdf"]'
-        );
-        await fileInput.setInputFiles(RESUME_PATH);
+        await uploadButton.waitFor({ state: "visible" });
+        await uploadButton.click();
         await randomDelay();
+        console.log("clecked upload pdf");
+
+        // Step 2: Click the dropdown to select uploaded PDF
+        // const dropdownButton = applyPage.locator(
+        //   'button:has-text("Select an uploaded PDF")'
+        // );
+
+        const dropdownButton = applyPage.locator(
+          'button[class*="SelectButton_selectButton"][type="button"]'
+        );
+        await dropdownButton.click();
+        console.log("clicked select uploaded");
+        await sleep(3000);
+
+        // Step 3: Click the first radio button for uploaded resume
+        const firstResumeOption = applyPage
+          .locator(".ReusablePdfSelectModal_name__qw_Hd")
+          .first();
+        await firstResumeOption.click();
+        await sleep(2000);
+
+        // Step 4: Click the Done button
+        const doneButton = applyPage.locator('button:has-text("Done")');
+        await doneButton.click();
+        await randomDelay();
+
+        console.log("✅ Selected uploaded resume successfully");
       } catch (err) {
-        console.log("❌ Error uploading Resume:", err);
+        console.log("❌ Error selecting uploaded Resume:", err);
       }
 
       try {
