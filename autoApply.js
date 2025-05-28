@@ -60,17 +60,42 @@ function randomDelay(min = 500, max = 2000) {
   await page.mouse.wheel(0, 3000);
   await sleep(2000);
 
-  const jobLinks = await page.$$eval(
-    'a[class^="JobSearchItem_jobTitle__"]',
-    (links) =>
-      links.map((link) =>
-        link.href.startsWith("/companies")
-          ? link.href
-          : `https://www.cakeresume.com${link.getAttribute("href")}`
-      )
-  );
+  // const jobLinks = await page.$$eval(
+  //   'a[class^="JobSearchItem_jobTitle__"]',
+  //   (links) =>
+  //     links.map((link) =>
+  //       link.href.startsWith("/companies")
+  //         ? link.href
+  //         : `https://www.cakeresume.com${link.getAttribute("href")}`
+  //     )
+  // );
 
-  console.log(`🔍 Found ${jobLinks.length} job links`);
+  const jobLinks = new Set();
+
+  for (let pageNum = 1; pageNum <= 8; pageNum++) {
+    const url = `https://www.cakeresume.com/jobs?query=Software%20Engineer&page=${pageNum}`;
+    console.log(`🌐 Visiting page ${pageNum}: ${url}`);
+    await page.goto(url);
+    await page.mouse.wheel(0, 3000);
+    await sleep(2000); // wait for lazy loading
+
+    const links = await page.$$eval(
+      'a[class^="JobSearchItem_jobTitle__"]',
+      (anchors) =>
+        anchors.map((link) =>
+          link.href.startsWith("/companies")
+            ? `https://www.cakeresume.com${link.getAttribute("href")}`
+            : link.href
+        )
+    );
+
+    console.log(`🔗 Page ${pageNum}: Found ${links.length} job links`);
+    links.forEach((link) => jobLinks.add(link));
+  }
+
+  console.log(`✅ Total unique job links collected: ${jobLinks.size}`);
+
+  //console.log(`🔍 Found ${jobLinks.length} job links`);
 
   for (const jobUrl of jobLinks) {
     try {
