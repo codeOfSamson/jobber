@@ -2,6 +2,17 @@ require("dotenv").config();
 const { chromium } = require("playwright");
 const path = require("path");
 const fs = require("fs");
+//import promptSync from "prompt-sync";
+const promptSync = require("prompt-sync");
+
+const prompt = promptSync();
+const jobTitle = prompt("🔍 What job title do you want to search for? ");
+const pageCount = parseInt(
+  prompt("📄 How many pages of results should we scan? "),
+  8
+);
+// Encode job title for URL (e.g. "software engineer" → "software%20engineer")
+const encodedQuery = encodeURIComponent(jobTitle.trim());
 
 const RESUME_PATH = path.resolve(__dirname, "TechRes@25.pdf");
 const APPLIED_LOG = path.resolve(__dirname, "applied_jobs.txt");
@@ -11,7 +22,7 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function randomDelay(min = 500, max = 2000) {
+function randomDelay(min = 500, max = 4000) {
   return sleep(Math.floor(Math.random() * (max - min) + min));
 }
 
@@ -54,26 +65,16 @@ function randomDelay(min = 500, max = 2000) {
   await randomDelay();
 
   // 2. Go to search page
-  await page.goto("https://www.cakeresume.com/jobs?query=Software%20Engineer");
+  await page.goto(`https://www.cakeresume.com/jobs?query=${encodedQuery}`);
   await randomDelay();
 
   await page.mouse.wheel(0, 3000);
-  await sleep(2000);
-
-  // const jobLinks = await page.$$eval(
-  //   'a[class^="JobSearchItem_jobTitle__"]',
-  //   (links) =>
-  //     links.map((link) =>
-  //       link.href.startsWith("/companies")
-  //         ? link.href
-  //         : `https://www.cakeresume.com${link.getAttribute("href")}`
-  //     )
-  // );
+  await randomDelay();
 
   const jobLinks = new Set();
 
-  for (let pageNum = 1; pageNum <= 8; pageNum++) {
-    const url = `https://www.cakeresume.com/jobs?query=Software%20Engineer&page=${pageNum}`;
+  for (let pageNum = 1; pageNum <= pageCount; pageNum++) {
+    const url = `https://www.cakeresume.com/jobs?query=${encodedQuery}&page=${pageNum}`;
     console.log(`🌐 Visiting page ${pageNum}: ${url}`);
     await page.goto(url);
     await page.mouse.wheel(0, 3000);
@@ -95,14 +96,11 @@ function randomDelay(min = 500, max = 2000) {
 
   console.log(`✅ Total unique job links collected: ${jobLinks.size}`);
 
-  //console.log(`🔍 Found ${jobLinks.length} job links`);
-
   for (const jobUrl of jobLinks) {
     try {
       await page.goto(jobUrl);
       console.log(`📝 Visiting: ${jobUrl}`);
       await randomDelay();
-      await sleep(6000);
 
       // Scroll and click on the real apply button that opens a new tab
       const [newPagePromise] = await Promise.all([
@@ -121,7 +119,7 @@ function randomDelay(min = 500, max = 2000) {
       ]);
 
       const applyPage = await newPagePromise;
-      await sleep(7000);
+      await randomDelay();
       console.log("🆕 New apply tab opened");
 
       try {

@@ -30,3 +30,6 @@ https://www.cake.me/companies/titansoft-tw/jobs/e19027
 https://www.cake.me/companies/codeer-ai/jobs/software-engineer-70da2c
 https://www.cake.me/companies/omnieyes/jobs/ai-algorithm-engineer-ai-algorithm-engineer-5969e1
 https://www.cake.me/companies/taboola-taiwan-ltd/jobs/sr-software-engineer-infrastructure
+https://www.cake.me/companies/octon-net/jobs/java-backend-engineer-32c7dd
+https://www.cake.me/companies/thingnario-028438/jobs/senior-full-stack-engineer-hybrid
+https://www.cake.me/companies/jkopay/jobs/full-service-engineer-dc4e7e
