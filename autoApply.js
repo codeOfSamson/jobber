@@ -2,21 +2,45 @@ require("dotenv").config();
 const { chromium } = require("playwright");
 const path = require("path");
 const fs = require("fs");
-//import promptSync from "prompt-sync";
-const promptSync = require("prompt-sync");
+const readline = require("readline");
 
-const prompt = promptSync();
-const jobTitle = prompt("🔍 What job title do you want to search for? ");
-const pageCount = parseInt(
-  prompt("📄 How many pages of results should we scan? "),
-  8
-);
-// Encode job title for URL (e.g. "software engineer" → "software%20engineer")
-const encodedQuery = encodeURIComponent(jobTitle.trim());
+//const prompt = promptSync({ sigint: true });
 
-const RESUME_PATH = path.resolve(__dirname, "TechRes@25.pdf");
-const APPLIED_LOG = path.resolve(__dirname, "applied_jobs.txt");
-const FAILED_LOG = path.resolve(__dirname, "failed_jobs.txt");
+const fallbackSearchTerms = [
+  "Software Developer",
+  "Software Engineer",
+  "軟體工程師",
+  "全端",
+  "Front End Dev",
+  "Backend Dev",
+  "Full Stack",
+];
+
+// Helper to prompt with timeout
+function promptWithTimeout(question, timeoutMs, fallbackValue) {
+  return new Promise((resolve) => {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
+
+    const timer = setTimeout(() => {
+      console.log(
+        `⏰ No input after ${
+          timeoutMs / 1000
+        }s, using fallback: ${fallbackValue}`
+      );
+      rl.close();
+      resolve(fallbackValue);
+    }, timeoutMs);
+
+    rl.question(question, (answer) => {
+      clearTimeout(timer);
+      rl.close();
+      resolve(answer.trim() || fallbackValue);
+    });
+  });
+}
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -26,7 +50,27 @@ function randomDelay(min = 500, max = 4000) {
   return sleep(Math.floor(Math.random() * (max - min) + min));
 }
 
-(async () => {
+async function main() {
+  const randomTerm =
+    fallbackSearchTerms[Math.floor(Math.random() * fallbackSearchTerms.length)];
+  const jobTitle = await promptWithTimeout(
+    "🔍 What job title do you want to search for? ",
+    8000,
+    randomTerm
+  );
+  const pageCount = await promptWithTimeout(
+    "📄 How many pages of results should we scan? ",
+    8000,
+    "5"
+  );
+  console.log(`\n🧠 Final search: "${jobTitle}" across ${pageCount} pages`);
+
+  const encodedQuery = encodeURIComponent(jobTitle.trim());
+  const pageSearchCount = parseInt(pageCount, 10);
+
+  const APPLIED_LOG = path.resolve(__dirname, "applied_jobs.txt");
+  const FAILED_LOG = path.resolve(__dirname, "failed_jobs.txt");
+
   const browser = await chromium.launch({ headless: false, slowMo: 50 });
   const context = await browser.newContext({
     viewport: { width: 1280, height: 800 },
@@ -73,7 +117,7 @@ function randomDelay(min = 500, max = 4000) {
 
   const jobLinks = new Set();
 
-  for (let pageNum = 1; pageNum <= pageCount; pageNum++) {
+  for (let pageNum = 1; pageNum <= pageSearchCount; pageNum++) {
     const url = `https://www.cakeresume.com/jobs?query=${encodedQuery}&page=${pageNum}`;
     console.log(`🌐 Visiting page ${pageNum}: ${url}`);
     await page.goto(url);
@@ -102,7 +146,6 @@ function randomDelay(min = 500, max = 4000) {
       console.log(`📝 Visiting: ${jobUrl}`);
       await randomDelay();
 
-      // Scroll and click on the real apply button that opens a new tab
       const [newPagePromise] = await Promise.all([
         context.waitForEvent("page"),
         page.evaluate(() => {
@@ -123,7 +166,6 @@ function randomDelay(min = 500, max = 4000) {
       console.log("🆕 New apply tab opened");
 
       try {
-        // Step 1: Click “Upload PDF”
         const uploadButton = applyPage
           .locator("div.JobApplicationForm_resumeTypeOption__b_UdE")
           .filter({ hasText: "Upload PDF" });
@@ -133,11 +175,6 @@ function randomDelay(min = 500, max = 4000) {
         await randomDelay();
         console.log("clecked upload pdf");
 
-        // Step 2: Click the dropdown to select uploaded PDF
-        // const dropdownButton = applyPage.locator(
-        //   'button:has-text("Select an uploaded PDF")'
-        // );
-
         const dropdownButton = applyPage.locator(
           'button[class*="SelectButton_selectButton"][type="button"]'
         );
@@ -145,14 +182,12 @@ function randomDelay(min = 500, max = 4000) {
         console.log("clicked select uploaded");
         await sleep(3000);
 
-        // Step 3: Click the first radio button for uploaded resume
         const firstResumeOption = applyPage
           .locator(".ReusablePdfSelectModal_name__qw_Hd")
           .first();
         await firstResumeOption.click();
         await sleep(2000);
 
-        // Step 4: Click the Done button
         const doneButton = applyPage.locator('button:has-text("Done")');
         await doneButton.click();
         await randomDelay();
@@ -163,7 +198,6 @@ function randomDelay(min = 500, max = 4000) {
       }
 
       try {
-        // Step 4: Click “My Template”
         const templateButton = applyPage.locator(
           'span:has-text("My Template")'
         );
@@ -171,13 +205,11 @@ function randomDelay(min = 500, max = 4000) {
         await templateButton.click();
         await applyPage.waitForTimeout(1000);
 
-        // Step 5: Select first template
         const firstRadio = applyPage
           .locator(".Radio_radioOuter__oddQs")
           .first();
         await firstRadio.click();
 
-        // Step 6: Confirm template
         const confirmBtn = applyPage.locator('span:has-text("Confirm")');
         await confirmBtn.click();
         await applyPage.waitForTimeout(500);
@@ -186,24 +218,19 @@ function randomDelay(min = 500, max = 4000) {
       }
 
       try {
-        // Step 7: Submit application
         const submitBtn = applyPage.locator(
           'button:has-text("Submit Application")'
         );
         await submitBtn.click();
-
-        // Wait and close tab
         await applyPage.waitForTimeout(2000);
         await applyPage.close();
       } catch (err) {
         console.log("❌ Error Clicking Submit:", err);
       }
 
-      // Step 8: Log applied
       console.log(`✅ Applied to ${jobUrl}`);
       fs.appendFileSync(APPLIED_LOG, jobUrl + "\n");
 
-      await applyPage.close();
       await randomDelay(2000, 4000);
     } catch (err) {
       console.log(`❌ Error applying to ${jobUrl}:`, err);
@@ -212,4 +239,9 @@ function randomDelay(min = 500, max = 4000) {
   }
 
   await browser.close();
-})();
+}
+
+// Start everything
+main().catch((err) => {
+  console.error("🔥 Script crashed:", err);
+});
