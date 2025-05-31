@@ -4,8 +4,6 @@ const path = require("path");
 const fs = require("fs");
 const readline = require("readline");
 
-//const prompt = promptSync({ sigint: true });
-
 const fallbackSearchTerms = [
   "Software Developer",
   "Software Engineer",
