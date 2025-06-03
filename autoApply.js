@@ -141,27 +141,51 @@ async function main() {
   for (const jobUrl of jobLinks) {
     try {
       await page.goto(jobUrl);
+      await page.waitForLoadState("networkidle");
+
       console.log(`📝 Visiting: ${jobUrl}`);
       await randomDelay();
 
-      const [newPagePromise] = await Promise.all([
-        context.waitForEvent("page"),
-        page.evaluate(() => {
-          const link = Array.from(document.querySelectorAll("a")).find(
-            (el) =>
-              el.href.includes("/apply-for-job") &&
-              el.textContent.trim() === "Apply Now"
-          );
-          if (link) {
-            link.scrollIntoView({ behavior: "smooth", block: "center" });
-            link.click();
-          }
-        }),
+      // Find the "Apply Now" link reliably
+      const applyLinks = page.locator(
+        'a[href^="/apply-for-job"]:has-text("Apply Now"):visible'
+      );
+
+      const count = await applyLinks.count();
+
+      if (count === 0) {
+        console.log(
+          `⚠️ No Apply button found: ${jobUrl}， or you've already applied`
+        );
+        fs.appendFileSync(FAILED_LOG, jobUrl + "\n");
+        continue;
+      }
+
+      // Pick one — e.g., the second one (index 1), or first if unsure
+      const applyLink = applyLinks.nth(1); // adjust index as needed
+      // Scroll it into view, if needed
+      await applyLink.scrollIntoViewIfNeeded();
+      await randomDelay();
+
+      // Set up listener BEFORE clicking
+      const [applyPage] = await Promise.all([
+        context.waitForEvent("page", { timeout: 15000 }),
+        applyLink.click(), // This should open the new tab
       ]);
 
-      const applyPage = await newPagePromise;
-      await randomDelay();
+      await applyPage.waitForLoadState("domcontentloaded");
       console.log("🆕 New apply tab opened");
+      await randomDelay();
+
+      // // Wait for new tab and click simultaneously
+      // const [newPagePromise] = await Promise.all([
+      //   context.waitForEvent("page", { timeout: 10000 }),
+      //   applyLink.click(),
+      // ]);
+
+      // const applyPage = await newPagePromise;
+      // await randomDelay();
+      // console.log("🆕 New apply tab opened");
 
       try {
         const uploadButton = applyPage
