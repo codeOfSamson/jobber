@@ -23,6 +23,6 @@ jobs:
         run: sleep $(( RANDOM % 2700 ))
 
       - name: Run autoapply
-        run: node autoapply.js
+        run: node main.js
         env:
           NODE_ENV: production
