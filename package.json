@@ -11,6 +11,9 @@
   "description": "",
   "dependencies": {
     "dotenv": "^16.5.0",
+    "ollama": "^0.5.16",
+    "ollama-node": "^0.1.28",
+    "pdf-parse": "^1.1.1",
     "playwright": "^1.52.0",
     "prompt-sync": "^4.2.0"
   }
