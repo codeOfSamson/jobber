@@ -1,6 +1,8 @@
 const fs = require("fs");
-const ollama = require("ollama-node");
-console.log(Object.keys(ollama));
+const axios = require("axios");
+
+const OLLAMA_API = "http://localhost:11434/api/generate";
+
 const questions = [
   "On a scale from 1 to 10, how familiar are you with multi-threading?",
   "Explain your experience with REST APIs.",
@@ -22,23 +24,25 @@ Now, answer the following screening questions:
     promptIntro + questions.map((q, i) => `${i + 1}. ${q}`).join("\n");
 
   try {
-    const response = await ollama.generate({
-      model: "llama3", // or any other local model you have
-      messages: [{ role: "user", content: fullPrompt }],
+    const response = await axios.post(OLLAMA_API, {
+      model: "llama3:latest",
+      prompt: fullPrompt,
       stream: false,
     });
 
-    return response.response;
+    return response.data.response;
   } catch (err) {
     console.error("❌ Error answering screening questions:", err);
     return null;
   }
 }
+
 async function runTest() {
   const aiAnswers = await answerScreeningQuestions(questions);
   console.log("📄 AI Screening Answers:\n", aiAnswers);
   return aiAnswers;
 }
+
 runTest();
 
 module.exports = {
