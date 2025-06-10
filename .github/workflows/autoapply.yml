@@ -3,6 +3,7 @@ name: Daily AutoApply
 on:
   schedule:
     - cron: "30 0 * * *" # Runs at 12:30 AM UTC every day
+  workflow_dispatch: # 👈 This enables manual trigger
 
 jobs:
   auto-apply:
@@ -18,6 +19,9 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
 
       - name: Add random delay (0–45 minutes)
         run: sleep $(( RANDOM % 2700 ))
