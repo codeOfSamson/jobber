@@ -1,7 +1,7 @@
 require("dotenv").config();
 
 async function login(page) {
-  await page.goto("https://www.cakeresume.com/login");
+  await page.goto("https://www.cakeresume.com/login?locale=zh-TW");
 
   try {
     await page.waitForSelector('button[aria-label="Close Message"]', {
