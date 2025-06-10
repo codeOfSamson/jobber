@@ -3,11 +3,6 @@ const axios = require("axios");
 
 const OLLAMA_API = "http://localhost:11434/api/generate";
 
-const questions = [
-  "On a scale from 1 to 10, how familiar are you with multi-threading?",
-  "Explain your experience with REST APIs.",
-];
-
 const resumeText = fs.readFileSync("resume.txt", "utf-8");
 
 async function answerScreeningQuestions(questions = []) {
@@ -29,7 +24,7 @@ Now, answer the following screening questions:
       prompt: fullPrompt,
       stream: false,
     });
-
+    console.log("aiRES", response.data);
     return response.data.response;
   } catch (err) {
     console.error("❌ Error answering screening questions:", err);
@@ -37,13 +32,13 @@ Now, answer the following screening questions:
   }
 }
 
-async function runTest() {
-  const aiAnswers = await answerScreeningQuestions(questions);
-  console.log("📄 AI Screening Answers:\n", aiAnswers);
-  return aiAnswers;
-}
+// async function runTest() {
+//   const aiAnswers = await answerScreeningQuestions(questions);
+//   console.log("📄 AI Screening Answers:\n", aiAnswers);
+//   return aiAnswers;
+// }
 
-runTest();
+// runTest();
 
 module.exports = {
   answerScreeningQuestions,

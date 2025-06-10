@@ -1,5 +1,6 @@
 const fs = require("fs");
 const { sleep, randomDelay } = require("./timing");
+const { answerScreeningQuestions } = require("./screening");
 
 async function applyToJobLinks(
   jobLinks,
@@ -80,6 +81,53 @@ async function applyToJobLinks(
         console.log("✅ Selected uploaded resume successfully");
       } catch (err) {
         console.log("❌ Error selecting uploaded Resume:", err);
+      }
+
+      // Find the "Screening Questions" inputs reliably
+      try {
+        const screeningSection = await applyPage.$(
+          '[class*="JobApplicationForm_questions"]'
+        );
+
+        if (screeningSection) {
+          const questionBlocks = await applyPage.$$(
+            '[class*="JobApplicationForm_question__"]'
+          );
+          const questions = [];
+
+          for (const block of questionBlocks) {
+            // Extract the question text
+            const questionText = await block.$eval(
+              ".JobApplicationForm_questionDescription__Gob75",
+              (el) => el.innerText.trim()
+            );
+            questions.push(questionText);
+          }
+
+          console.log("🧠 Screening Question:", questions);
+
+          const aiResponse = await answerScreeningQuestions(questions);
+          if (!aiResponse) throw new Error("AI failed to return response");
+
+          const answers = aiResponse
+            .split(/\n(?=\d+\.\s)/) // Split on newlines before "1. ", "2. ", etc.
+            .map((ans) => ans.replace(/^\d+\.\s*/, "").trim()); // Remove "1. ", "2. ", etc.\
+          console.log("🧠 Screening Answers:", answers);
+
+          for (let i = 0; i < questionBlocks.length; i++) {
+            const input = await questionBlocks[i].$("textarea, input");
+            if (input && answers[i]) {
+              await applyPage.waitForTimeout(2000);
+              await input.fill(answers[i]);
+              await applyPage.waitForTimeout(2000);
+            }
+          }
+          console.log("✅ Screening questions filled.");
+        } else {
+          console.log("✅ No screening questions detected.");
+        }
+      } catch (err) {
+        console.error("❌ Error in screening questions block:", err);
       }
 
       try {
