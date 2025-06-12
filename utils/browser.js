@@ -1,7 +1,7 @@
 const { chromium } = require("playwright");
 
 async function launchBrowser() {
-  const browser = await chromium.launch({ headless: false, slowMo: 50 });
+  const browser = await chromium.launch({ headless: true, slowMo: 50 });
   const context = await browser.newContext({
     viewport: { width: 1280, height: 800 },
     userAgent:
