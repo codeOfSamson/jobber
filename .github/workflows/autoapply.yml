@@ -3,11 +3,12 @@ name: Daily AutoApply
 on:
   schedule:
     - cron: "30 0 * * *" # Runs at 12:30 AM UTC every day
-  workflow_dispatch: # 👈 This enables manual trigger
+  workflow_dispatch: # Manual trigger support
 
 jobs:
   auto-apply:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -17,16 +18,15 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps
-
       - name: Add random delay (0–45 minutes)
         run: sleep $(( RANDOM % 2700 ))
 
-      - name: Run autoapply
-        run: node main.js
-        env:
-          NODE_ENV: production
+      - name: Build Docker image
+        run: docker build -t job-app-bot .
+
+      - name: Run job-app-bot container with secrets
+        run: |
+          docker run --rm \
+            -e CAKERESUME_EMAIL=${{ secrets.CAKERESUME_E }} \
+            -e CAKERESUME_PASSWORD=${{ secrets.CAKERESUME_P }} \
+            job-app-bot
