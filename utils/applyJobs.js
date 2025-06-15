@@ -1,6 +1,9 @@
 const fs = require("fs");
 const { sleep, randomDelay } = require("./timing");
 const { answerScreeningQuestions } = require("./screening");
+const { sendSkippedJobsEmail } = require("./utils/email");
+const skippedScreeningLinks = [];
+const useAI = process.env.USE_AI === "true";
 
 async function applyToJobLinks(
   jobLinks,
@@ -90,6 +93,12 @@ async function applyToJobLinks(
         );
 
         if (screeningSection) {
+          if (!useAI) {
+            console.log("⚠️ Skipping job with screening questions");
+            skippedScreeningLinks.push(jobUrl);
+            return;
+          }
+
           const questionBlocks = await applyPage.$$(
             '[class*="JobApplicationForm_question__"]'
           );
@@ -168,6 +177,14 @@ async function applyToJobLinks(
     } catch (err) {
       console.log(`❌ Error applying to ${jobUrl}:`, err);
       fs.appendFileSync(FAILED_LOG, jobUrl + "\n");
+    }
+  }
+  //sends email of jobUrl with screening questions or manual finish when ai not available
+  if (!useAI && skippedScreeningLinks.length > 0) {
+    try {
+      await sendSkippedJobsEmail(skippedScreeningLinks);
+    } catch (error) {
+      console.error("❌ Failed to send email:", error);
     }
   }
 }
