@@ -1,7 +1,7 @@
 const fs = require("fs");
 const { sleep, randomDelay } = require("./timing");
 const { answerScreeningQuestions } = require("./screening");
-const { sendSkippedJobsEmail } = require("./utils/email");
+const { sendSkippedJobsEmail } = require("./email");
 const skippedScreeningLinks = [];
 const useAI = process.env.USE_AI === "true";
 
