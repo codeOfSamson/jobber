@@ -28,8 +28,6 @@ async function applyToJobLinks(
 
       const count = await applyLinks.count();
 
-      console.log("count", count);
-
       if (count === 0) {
         console.log(
           `⚠️ No Apply button found: ${jobUrl}， or you've already applied.`
@@ -62,7 +60,7 @@ async function applyToJobLinks(
         await uploadButton.waitFor({ state: "visible" });
         await uploadButton.click();
         await randomDelay();
-        console.log("clecked upload pdf");
+        console.log("clicked upload pdf");
 
         const dropdownButton = applyPage.locator(
           'button[class*="SelectButton_selectButton"][type="button"]'
@@ -116,8 +114,12 @@ async function applyToJobLinks(
           console.log("🧠 Screening Question:", questions);
 
           const aiResponse = await answerScreeningQuestions(questions);
-          if (!aiResponse) throw new Error("AI failed to return response");
-
+          if (!aiResponse) {
+            console.warn("⚠️ AI failed, falling back to manual review.");
+            // Your additional logic here:
+            skippedScreeningLinks.push(currentJobLink); // for example
+            throw new Error("AI failed to return response");
+          }
           const answers = aiResponse
             .split(/\n(?=\d+\.\s)/) // Split on newlines before "1. ", "2. ", etc.
             .map((ans) => ans.replace(/^\d+\.\s*/, "").trim()); // Remove "1. ", "2. ", etc.\
@@ -180,7 +182,7 @@ async function applyToJobLinks(
     }
   }
   //sends email of jobUrl with screening questions or manual finish when ai not available
-  if (!useAI && skippedScreeningLinks.length > 0) {
+  if (skippedScreeningLinks.length > 0) {
     try {
       await sendSkippedJobsEmail(skippedScreeningLinks);
     } catch (error) {

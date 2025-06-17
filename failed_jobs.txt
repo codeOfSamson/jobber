@@ -511,3 +511,7 @@ https://www.cake.me/companies/tw-sec-gifts/jobs/wordpress-developer-remote-work
 https://www.cake.me/companies/proto-cx/jobs/fullstack-developer-taiwan
 https://www.cake.me/companies/tw-sec-gifts/jobs/intern-wordpress-engineer-remote-internship
 https://www.cake.me/companies/carro/jobs/remote-frontend-engineer-reactjs
+https://www.cake.me/companies/gmind-tech/jobs/ac6146
+https://www.cake.me/companies/akohub/jobs/software-developer-engineer
+https://www.cake.me/companies/botrista-technology-taiwan-co-ltd/jobs/software-development-engineer-in-test-sdet-801efc
+https://www.cake.me/companies/cake-recruitment-consulting/jobs/da5e01
