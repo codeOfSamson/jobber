@@ -1,0 +1,69 @@
+
+
+Sam Flavin 
+samflavin981@gmail.com  
+GitHub.com/samflavin | | GitHub.com/codeOfSamson | | Linkedin.com/in/sam-flavin  
+Summary  
+World and wide web explorer and engineer with a proven track record in designing, developing, and 
+deploying scalable applications. Highly self-motivated, detail-oriented, and passionate about creative 
+problem-solving and community-oriented development. Fluent in English, Chinese, and Spanish, with a 
+global perspective on software development.  
+Technical Skills  
+Programming Languages: JavaScript (ES6+), TypeScript, C#  
+Frontend: React, Angular, Next.js, Redux, Material UI, SCSS, Bootstrap, jQuery 
+Backend: Node.js, Nest.js, .NET Core, Azure, SQL, PostgreSQL, MongoDB, GraphQL 
+Testing: Cypress, Selenium, Jest  
+Tools & Platforms: Git, Jira, Postman, Fiddler, Docker 
+Methodologies: Agile, Test-Driven Development (TDD)  
+Experience  
+English Teacher  
+Geos | Jan 2024 – Jan 2025  
+● Taught English to both kids and adults, tailoring lessons to fit individual learning styles and 
+needs.  
+● Created customized lesson plans, ensuring engaging and effective learning experiences.  
+● Provided take-home notes after each class to reinforce learning and track progress.  
+● Recorded student development and adjusted lesson strategies accordingly.  
+Frontend Software Developer  
+Target | July 2022 – December 2023  
+● Engineered a web app that streamlined workflow between internal merchant and marketing teams, 
+improving operational efficiency.  
+● Enhanced user experience by implementing new features, refactoring legacy code, and maintaining 
+consistent communication with stakeholders.  
+● Ensured robust test coverage using Jest and Cypress, contributing to reliable deployments. 
+● Utilized React, Angular, Node.js, HTML, SCSS, and modern testing frameworks.  
+Full-Stack Software Developer  
+Patterson Companies Inc. | January 2020 – January 2022  
+● Developed, tested, and maintained critical features for dental practice management software, 
+boosting system reliability.  
+● Proactively collaborated with cross-functional teams in an Agile environment, conducting QA, code 
+reviews, and deployments.  
+● Worked extensively with Azure, Angular.js, TypeScript, C#, .NET Core, and SQL. 
+
+Full-Stack Software Development Student  
+Prime Digital Academy | May 2019 – November 2019  
+● Solo Project: MakePlans  
+● Designed and built an event-planning app allowing users to create events, invite guests, and 
+communicate through polls and chat.  
+●Leveraged JavaScript, React-Redux, Material UI, Postgres, SQL, Twilio, and CSS for a polished 
+and functional UI.  
+Teacher Assistant  
+Yinghua Academy | January 2018 – June 2019  
+● Supported bilingual education in Chinese and English, assisting students with special needs to 
+achieve academic and social goals.  
+● Maintained documentation of progress aligned with Individualized Education Programs (IEPs).  
+Education  
+Prime Digital Academy | Minneapolis, MN (2019)  
+Full-Stack Software Engineering Certification  
+師範大學語言中心 (National Taiwan Normal University) | Taipei, Taiwan (2016) 
+Certificate in Modern Chinese and Chinese Culture  
+University of Minnesota | Duluth, MN (2014)  
+Bachelor of Arts in English Literature | Minor: Hispanic Studies  
+Projects  
+MakePlans (2019)  
+● Designed a dynamic event-planning app to streamline coordination and enhance communication. 
+● Technologies: JavaScript, React-Redux, SQL, Material UI, Twilio, CSS.  
+Employee Feedback System (Freelance-2025)  
+● A robust review management system with features like role-based access control, audit 
+logging, and automated notifications. The backend API was built using GraphQL with 
+advanced filtering and batching capabilities. I ensured scalability with optimized database 
+design, and deployed the system using Docker. 
