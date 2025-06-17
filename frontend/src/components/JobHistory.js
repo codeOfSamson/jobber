@@ -8,6 +8,8 @@ import {
   Chip,
   Box,
   CircularProgress,
+  Alert,
+  Button,
 } from "@mui/material";
 
 const JobHistory = () => {
@@ -17,16 +19,25 @@ const JobHistory = () => {
 
   const fetchHistory = async () => {
     try {
+      setLoading(true);
+      setError("");
+
       const response = await fetch("http://localhost:3001/api/jobs/history");
-      const data = await response.json();
 
       if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (!data.success) {
         throw new Error(data.error || "Failed to fetch job history");
       }
 
-      setHistory(data.history);
+      setHistory(data.history || []);
     } catch (err) {
-      setError(err.message);
+      console.error("Error fetching history:", err);
+      setError(err.message || "Failed to load job history");
     } finally {
       setLoading(false);
     }
@@ -54,6 +65,7 @@ const JobHistory = () => {
     return (
       <Paper elevation={3} sx={{ p: 3, textAlign: "center" }}>
         <CircularProgress />
+        <Typography sx={{ mt: 2 }}>Loading job history...</Typography>
       </Paper>
     );
   }
@@ -61,7 +73,12 @@ const JobHistory = () => {
   if (error) {
     return (
       <Paper elevation={3} sx={{ p: 3 }}>
-        <Typography color="error">{error}</Typography>
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+        <Button variant="contained" onClick={fetchHistory} sx={{ mt: 2 }}>
+          Retry
+        </Button>
       </Paper>
     );
   }
@@ -72,7 +89,9 @@ const JobHistory = () => {
         Job Application History
       </Typography>
       {history.length === 0 ? (
-        <Typography>No job applications yet</Typography>
+        <Alert severity="info">
+          No job applications yet. Start a job search to see your history here.
+        </Alert>
       ) : (
         <List>
           {history.map((job, index) => (
