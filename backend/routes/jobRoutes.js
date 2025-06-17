@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 const multer = require("multer");
 const path = require("path");
-const { startJobSearch } = require("../controllers/jobController");
+const {
+  startJobSearch,
+  getJobHistory,
+} = require("../controllers/jobController");
 
 // Configure multer for file uploads
 const storage = multer.diskStorage({
@@ -28,5 +31,8 @@ const upload = multer({
 
 // Route for starting job search with resume upload
 router.post("/search", upload.single("resume"), startJobSearch);
+
+// Route for getting job history
+router.get("/history", getJobHistory);
 
 module.exports = router;
