@@ -32,19 +32,21 @@ function App() {
         </Toolbar>
       </AppBar>
 
-      <Container maxWidth="lg" sx={{ mt: 4 }}>
+      <Container maxWidth="xl" sx={{ mt: 4 }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 3 }}>
           <Tabs value={currentTab} onChange={handleTabChange}>
-            <Tab label="Job Search" />
+            <Tab label="Job Search & Logs" />
             <Tab label="History" />
-            <Tab label="Logs" />
           </Tabs>
         </Box>
 
         {currentTab === 0 && (
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6} sx={{ width: "45%" }}>
               <JobSearchForm />
+            </Grid>
+            <Grid item xs={12} md={6} sx={{ width: "45%" }}>
+              <LogViewer />
             </Grid>
           </Grid>
         )}
@@ -53,14 +55,6 @@ function App() {
           <Grid container spacing={3}>
             <Grid item xs={12}>
               <JobHistory />
-            </Grid>
-          </Grid>
-        )}
-
-        {currentTab === 2 && (
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <LogViewer />
             </Grid>
           </Grid>
         )}

@@ -47,7 +47,7 @@ const LogViewer = () => {
       }}
     >
       <Typography variant="h6" gutterBottom sx={{ color: "#fff" }}>
-        Backend Logs
+        System Logs:
       </Typography>
       <Box sx={{ fontFamily: "monospace", whiteSpace: "pre-wrap" }}>
         {logs.map((log, index) => (
