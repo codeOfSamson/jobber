@@ -71,6 +71,8 @@ async function getJobHistory(req, res) {
         timestamp: new Date().toISOString(),
       }));
 
+    console.log(applied);
+
     const failed = failedJobs
       .split("\n")
       .filter(Boolean)
