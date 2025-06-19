@@ -62,8 +62,6 @@ const JobHistory = () => {
   useEffect(() => {
     fetchHistory();
     // Refresh history every 30 seconds
-    const interval = setInterval(fetchHistory, 30000);
-    return () => clearInterval(interval);
   }, []);
 
   // Apply filters whenever filter states change
@@ -106,13 +104,17 @@ const JobHistory = () => {
       }
     }
 
-    // Search filter
+    // Search filter (now includes jobUpdated and employerActive)
     if (searchTerm) {
       filtered = filtered.filter(
         (job) =>
           job.url.toLowerCase().includes(searchTerm.toLowerCase()) ||
           (job.error &&
-            job.error.toLowerCase().includes(searchTerm.toLowerCase()))
+            job.error.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (job.jobUpdated &&
+            job.jobUpdated.toLowerCase().includes(searchTerm.toLowerCase())) ||
+          (job.employerActive &&
+            job.employerActive.toLowerCase().includes(searchTerm.toLowerCase()))
       );
     }
 
@@ -200,7 +202,7 @@ const JobHistory = () => {
             <TextField
               fullWidth
               size="small"
-              placeholder="Search jobs..."
+              placeholder="Search jobs, errors, or metadata..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               InputProps={{
@@ -275,15 +277,27 @@ const JobHistory = () => {
               </Box>
               <ListItemText
                 primary={
-                  <Typography
-                    component="a"
-                    href={job.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{ color: "primary.main", textDecoration: "none" }}
-                  >
-                    {job.url}
-                  </Typography>
+                  <>
+                    <Typography
+                      component="a"
+                      href={job.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{ color: "primary.main", textDecoration: "none" }}
+                    >
+                      {job.url}
+                    </Typography>
+                    {job.jobUpdated && (
+                      <Typography variant="body2" color="text.secondary">
+                        {job.jobUpdated}
+                      </Typography>
+                    )}
+                    {job.employerActive && (
+                      <Typography variant="body2" color="text.secondary">
+                        {job.employerActive}
+                      </Typography>
+                    )}
+                  </>
                 }
                 secondary={job.error}
               />
