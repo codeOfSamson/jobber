@@ -56,35 +56,48 @@ async function getJobHistory(req, res) {
     const failedLogPath = path.join(__dirname, "../failed_jobs.txt");
 
     // Read both log files
-    const [appliedJobs, failedJobs] = await Promise.all([
+    const [appliedJobsRaw, failedJobsRaw] = await Promise.all([
       fs.readFile(appliedLogPath, "utf8").catch(() => ""),
       fs.readFile(failedLogPath, "utf8").catch(() => ""),
     ]);
 
-    // Parse the logs
-    const applied = appliedJobs
-      .split("\n")
-      .filter(Boolean)
-      .map((job) => ({
-        url: job,
-        status: "applied",
-        timestamp: new Date().toISOString(),
-      }));
+    // Helper to parse log lines with metadata
+    function parseLogWithMetadata(lines, status) {
+      const jobs = [];
+      let jobUpdated = null;
+      let employerActive = null;
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i].trim();
+        if (!line) continue;
+        if (line.startsWith("Job updated ")) {
+          jobUpdated = line;
+        } else if (line.startsWith("The employer was active")) {
+          employerActive = line;
+        } else if (line.startsWith("http")) {
+          let url = line;
+          let error = undefined;
+          // For failed jobs, error is after ' - '
+          if (status === "failed" && url.includes(" - ")) {
+            [url, error] = url.split(" - ");
+          }
+          jobs.push({
+            url,
+            status,
+            error,
+            jobUpdated,
+            employerActive,
+            timestamp: new Date().toISOString(),
+          });
+          jobUpdated = null;
+          employerActive = null;
+        }
+      }
+      return jobs;
+    }
 
-    console.log(applied);
-
-    const failed = failedJobs
-      .split("\n")
-      .filter(Boolean)
-      .map((job) => {
-        const [url, error] = job.split(" - ");
-        return {
-          url,
-          status: "failed",
-          error: error || "Unknown error",
-          timestamp: new Date().toISOString(),
-        };
-      });
+    // Parse applied and failed jobs
+    const applied = parseLogWithMetadata(appliedJobsRaw.split("\n"), "applied");
+    const failed = parseLogWithMetadata(failedJobsRaw.split("\n"), "failed");
 
     res.json({
       success: true,

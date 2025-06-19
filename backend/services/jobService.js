@@ -22,8 +22,8 @@ async function autoApply(
     email,
   });
 
-  const APPLIED_LOG = path.resolve(__dirname, "../../applied_jobs.txt");
-  const FAILED_LOG = path.resolve(__dirname, "../../failed_jobs.txt");
+  const APPLIED_LOG = path.resolve(__dirname, "../applied_jobs.txt");
+  const FAILED_LOG = path.resolve(__dirname, "../failed_jobs.txt");
 
   console.log(`\n🧠 Starting search: "${jobTitle}" across ${pageCount} pages`);
 
@@ -39,7 +39,6 @@ async function autoApply(
     console.log("Login successful");
 
     const jobLinks = await collectJobLinks(page, jobTitle, parseInt(pageCount));
-    console.log(`Found ${jobLinks.length} job links`);
 
     const result = await applyToJobLinks(
       jobLinks,
@@ -49,11 +48,6 @@ async function autoApply(
       FAILED_LOG
     );
     console.log("Job application process completed");
-
-    // Send email notification
-    if (email) {
-      await sendEmailNotification(email, result);
-    }
 
     return result;
   } catch (error) {

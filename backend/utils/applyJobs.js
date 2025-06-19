@@ -20,9 +20,11 @@ async function applyToJobLinks(
   };
 
   for (const jobUrl of jobLinks) {
+    let jobUpdatedText = "N/A";
+    let employerActiveText = "N/A";
     try {
-      await page.goto(jobUrl);
-      await page.waitForLoadState("networkidle");
+      await page.goto(jobUrl, { timeout: 60000 });
+      await page.waitForLoadState("domcontentloaded", { timeout: 60000 });
       sleep(5000);
 
       console.log(`📝 Visiting: ${jobUrl}`);
@@ -35,11 +37,32 @@ async function applyToJobLinks(
 
       const count = await applyLinks.count();
 
+      try {
+        const jobUpdatedElement = page.locator(
+          'div[class*="InlineMessage_label"]:has-text("Job updated")'
+        );
+        const employerActiveElement = page.locator(
+          'div[class*="InlineMessage_label"]:has-text("Employer was active")'
+        );
+
+        jobUpdatedText =
+          (await jobUpdatedElement.first().textContent()) ||
+          "Job update info not found";
+        employerActiveText =
+          (await employerActiveElement.first().textContent()) ||
+          "Employer activity info not found";
+
+        console.log("📅", jobUpdatedText);
+        console.log("🧑‍💼", employerActiveText);
+      } catch (err) {
+        console.error("❌ Failed to scrape update/active info:", err);
+      }
+
       let applyLink = null;
 
       if (count > 0) {
         // Prefer the second button, fallback to first if only one
-        applyLink = applyLinks.nth(count > 1 ? 1 : 0);
+        applyLink = applyLinks.nth(1);
         console.log("✅ Found Apply Now button.");
       } else {
         // Try finding a "Reapply" link instead
@@ -49,7 +72,7 @@ async function applyToJobLinks(
         const reapplyCount = await reapplyLinks.count();
 
         if (reapplyCount > 0) {
-          applyLink = reapplyLinks.first();
+          applyLink = reapplyLinks.nth(1);
           console.log("♻️ Found Reapply link.");
         } else {
           console.log(`⚠️ No Apply or Reapply link found: ${jobUrl}`);
@@ -58,25 +81,6 @@ async function applyToJobLinks(
         }
       }
 
-      let jobUpdatedText = "";
-      let employerActiveText = "";
-
-      try {
-        // Select all spans that contain possible labels
-        const spans = await page.locator("span").allTextContents();
-
-        // Look for strings that match the patterns
-        jobUpdatedText =
-          spans.find((text) => text.toLowerCase().includes("job updated")) ||
-          "Job update info not found";
-
-        employerActiveText =
-          spans.find((text) =>
-            text.toLowerCase().includes("employer was active")
-          ) || "Employer activity info not found";
-      } catch (err) {
-        console.error("❌ Failed to scrape update/active info:", err);
-      }
       // Pick one — e.g., the second one (index 1), or first if unsure
       //const applyLink = applyLinks.nth(1); // adjust index as needed
       // Scroll it into view, if needed
@@ -215,16 +219,19 @@ async function applyToJobLinks(
       console.log(`✅ Applied to ${jobUrl}`);
       await fs.appendFile(
         APPLIED_LOG,
-        jobUrl + "\n" + jobUpdatedText + "\n" + employerActiveText
+        `${jobUrl}\n${jobUpdatedText}\n${employerActiveText}\n\n`
       );
 
       await randomDelay(2000, 4000);
     } catch (err) {
-      console.log(`❌ Error applying to ${jobUrl}:`, err);
+      console.error(`❌ Navigation or scraping failed for ${jobUrl}:`, err);
       await fs.appendFile(
         FAILED_LOG,
-        jobUrl + "\n" + jobUpdatedText + "\n" + employerActiveText
+        `${jobUrl} - ${
+          err?.message || "Unknown error"
+        }\n${jobUpdatedText}\n${employerActiveText}\n\n`
       );
+      continue;
     }
   }
 
