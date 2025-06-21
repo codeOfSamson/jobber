@@ -22,3 +22,261 @@ Call log:
 Job updated over 2 years ago
 The employer was active about 2 months ago
 
+https://www.cake.me/companies/eslitec/jobs/backend-engineer_backend-developer-node-js - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 2 months ago
+The employer was active  3 days ago
+
+https://www.cake.me/companies/alphaintelligence/jobs/full-stack-developer-ruby-on-rails
+https://www.cake.me/companies/akohub/jobs/software-developer-engineer - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  3 days ago
+The employer was active about 18 hours ago
+
+https://www.cake.me/companies/panasonic-vietnam/jobs/fullstack-backend-developer-9843b6
+https://www.cake.me/companies/pacston/jobs/a8eda0 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 1 month ago
+The employer was active  3 days ago
+
+https://www.cake.me/companies/catchopz/jobs/js-fullstack-engineer - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 2 months ago
+The employer was active about 24 hours ago
+
+https://www.cake.me/companies/i2csolution/jobs/rd-full-stack-developer-node-js - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 2 months ago
+The employer was active about 9 hours ago
+
+https://www.cake.me/companies/netskope.tw/jobs/full-stack-ui-developer
+https://www.cake.me/companies/moovo-mobility/jobs/full-stack-engineer-c192e0 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 2 months ago
+The employer was active  1 day ago
+
+https://www.cake.me/companies/aetherai/jobs/4b117b - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  23 days ago
+The employer was active about 23 hours ago
+
+https://www.cake.me/companies/overview-ai/jobs/full-stack-engineer-f6ba30 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  3 months ago
+The employer was active about 19 hours ago
+
+https://www.cake.me/companies/appaegis/jobs/full-end-engineer-64ea3d - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 2 months ago
+The employer was active about 7 hours ago
+
+https://www.cake.me/companies/cake-recruitment-consulting/jobs/fdb62b
+https://www.cake.me/companies/cake-recruitment-consulting/jobs/31ee38 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 1 month ago
+The employer was active about 5 hours ago
+
+https://www.cake.me/companies/transferhelper/jobs/full-stack-engineer-team-leader - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  4 days ago
+The employer was active  1 day ago
+
+https://www.cake.me/companies/block-river-technologies/jobs/full-stack-engineer-ccb6d5
+https://www.cake.me/companies/cake-recruitment-consulting/jobs/4e69bd - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 1 month ago
+The employer was active about 5 hours ago
+
+https://www.cake.me/companies/appaegis/jobs/53ba2b - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 2 months ago
+The employer was active about 8 hours ago
+
+https://www.cake.me/companies/cake-recruitment-consulting/jobs/912e6e - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 1 month ago
+The employer was active about 5 hours ago
+
+https://www.cake.me/companies/conbizconsulting/jobs/819149 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 2 months ago
+The employer was active about 4 hours ago
+
+https://www.cake.me/companies/trident-technology-solutions-inc/jobs/b82a88 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  2 months ago
+The employer was active about 3 hours ago
+
+https://www.cake.me/companies/meepshop/jobs/software-engineer-backend-700-000 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 2 months ago
+The employer was active  2 days ago
+
+https://www.cake.me/companies/trident-technology-solutions-inc/jobs/a0b4a8 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  2 months ago
+The employer was active about 3 hours ago
+
+https://www.cake.me/companies/hour-loop/jobs/software-engineer-f3c235
+https://www.cake.me/companies/circle-d82e91/jobs/software-engineer-backend-golang - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  2 days ago
+The employer was active  2 days ago
+
+https://www.cake.me/companies/codeer-ai/jobs/senior-software-engineer-d71391 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  30 days ago
+The employer was active  3 days ago
+
+https://www.cake.me/companies/AIFIAN/jobs/senior-software-engineer-b0ea08 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated about 4 hours ago
+The employer was active about 4 hours ago
+
+https://www.cake.me/companies/RakutenTaiwan/jobs/rakuten-frontend-software-engineer-du - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  28 days ago
+The employer was active about 10 hours ago
+
+https://www.cake.me/companies/RakutenTaiwan/jobs/rakuten-senior-android-engineer-du - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  28 days ago
+The employer was active about 10 hours ago
+
+https://www.cake.me/companies/omnieyes/jobs/ai-algorithm-engineer-ai-algorithm-engineer-5969e1 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  14 days ago
+The employer was active  2 days ago
+
+https://www.cake.me/companies/titansoft-tw/jobs/software-engineer-full-end-engineer - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  24 days ago
+The employer was active  2 days ago
+
+https://www.cake.me/companies/titansoft-tw/jobs/e19027 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  24 days ago
+The employer was active  2 days ago
+
+https://www.cake.me/companies/codeer-ai/jobs/software-engineer-70da2c - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span:has-text("You have applied for this position")').locator('a[href^="/apply-for-job"]:has-text("Reapply")').nth(1)[22m
+
+Job updated  30 days ago
+The employer was active  3 days ago
+
+https://www.cake.me/companies/trident-technology-solutions-inc/jobs/59ae0e - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span.JobSectionMessage_content__DoAKw').filter({ hasText: 'You have applied for this position' }).locator('a:has-text("Reapply")').nth(1)[22m
+
+Job updated  2 months ago
+The employer was active about 3 hours ago
+
+https://www.cake.me/companies/trident-technology-solutions-inc/jobs/65cee2 - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span.JobSectionMessage_content__DoAKw').filter({ hasText: 'You have applied for this position' }).locator('a:has-text("Reapply")').nth(1)[22m
+
+Job updated  2 months ago
+The employer was active about 3 hours ago
+
+https://www.cake.me/companies/trident-technology-solutions-inc/jobs/dc9c0f - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span.JobSectionMessage_content__DoAKw').filter({ hasText: 'You have applied for this position' }).locator('a:has-text("Reapply")').nth(1)[22m
+
+Job updated  2 months ago
+The employer was active about 3 hours ago
+
+https://www.cake.me/companies/trident-technology-solutions-inc/jobs/b82a88
+https://www.cake.me/companies/trident-technology-solutions-inc/jobs/725fda - locator.scrollIntoViewIfNeeded: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('span.JobSectionMessage_content__DoAKw').filter({ hasText: 'You have applied for this position' }).locator('a:has-text("Reapply")').nth(1)[22m
+
+Job updated  2 months ago
+The employer was active about 3 hours ago
+
+https://www.cake.me/companies/hktv-hk-big5-global-home-htm-d36855/jobs/e20f3a - Cannot read properties of null (reading 'scrollIntoViewIfNeeded')
+Job updated  1 day ago
+The employer was active about 5 hours ago
+
+https://www.cake.me/companies/cake-recruitment-consulting/jobs/1bb7b9
+https://www.cake.me/companies/cake-recruitment-consulting/jobs/1ce501
+https://www.cake.me/companies/cake-recruitment-consulting/jobs/4e69bd
+https://www.cake.me/companies/appaegis/jobs/53ba2b
+https://www.cake.me/companies/cake-recruitment-consulting/jobs/179686
+https://www.cake.me/companies/nunox-tech-co-ltd-d4e185/jobs/senior-fullstack-engineer-sr-fullstack-engineer
+https://www.cake.me/companies/netskope.tw/jobs/full-stack-ui-developer
+https://www.cake.me/companies/jkopay/jobs/full-service-engineer-dc4e7e
+https://www.cake.me/companies/meetagile/jobs/mid-sr-full-stack-engineer-front-end
+https://www.cake.me/companies/gaia-net/jobs/full-stack-engineerfull-stack-engineer-6708c5
+https://www.cake.me/companies/cmoney/jobs/b65324
+https://www.cake.me/companies/block-river-technologies/jobs/full-stack-engineer-ccb6d5
+https://www.cake.me/companies/ailabs/jobs/sr-front-end-full-stack-engineer
+https://www.cake.me/companies/netskope.tw/jobs/staff-full-stack-engineer-ui
+https://www.cake.me/companies/cake-recruitment-consulting/jobs/89b374
+https://www.cake.me/companies/netskope.tw/jobs/full-stack-software-engineer-api-protection
+https://www.cake.me/companies/tkspring/jobs/full-stack-engineer-7e9bc1
+https://www.cake.me/companies/netskope.tw/jobs/sr-staff-full-stack-engineer-ui
+https://www.cake.me/companies/itrust-wellness/jobs/fullstack-x82et4
+https://www.cake.me/companies/cake-recruitment-consulting/jobs/27cdd1
+https://www.cake.me/companies/simpos/jobs/full-stack-engineer-node-js
+https://www.cake.me/companies/taodigitalsolutions/jobs/full-stack-engineer-0afabb
+https://www.cake.me/companies/datamana-app/jobs/senior-full-stack-engineer-over-8-years-remote
+https://www.cake.me/companies/agoda/jobs/b02752
+https://www.cake.me/companies/Google/jobs/101699794438628038-senior-software-engineer-full-stack-safety-technology-android
+https://www.cake.me/companies/Google/jobs/86317951321285318-senior-software-engineer-full-stack-google-cloud
+https://www.cake.me/companies/Google/jobs/112077395015410374-senior-software-engineer-full-stack-ux-research-251bb04c4b98ece68e77c00d84ed10
+https://www.cake.me/companies/hennge/jobs/gip-fullstack
+https://www.cake.me/companies/Google/jobs/114954662125150918-senior-software-engineer-full-stack-google-play-c066670b317199fe857a08bb6267a6
+https://www.cake.me/companies/Google/jobs/133494358958580422-application-development-engineer-full-stack-goog-060a95a1c83ea70d8178b30b43c90d

@@ -25,7 +25,7 @@ async function applyToJobLinks(
     try {
       await page.goto(jobUrl, { timeout: 60000 });
       await page.waitForLoadState("domcontentloaded", { timeout: 60000 });
-      sleep(5000);
+      sleep(8000);
 
       console.log(`📝 Visiting: ${jobUrl}`);
       await randomDelay();
@@ -36,6 +36,7 @@ async function applyToJobLinks(
       );
 
       const count = await applyLinks.count();
+      console.log(`Found ${count} apply links.`);
 
       try {
         const jobUpdatedElement = page.locator(
@@ -66,20 +67,27 @@ async function applyToJobLinks(
         console.log("✅ Found Apply Now button.");
       } else {
         // Try finding a "Reapply" link instead
-        const reapplyLinks = page.locator(
-          'span:has-text("You have applied for this position") >> a[href^="/apply-for-job"]:has-text("Reapply")'
-        );
-        const reapplyCount = await reapplyLinks.count();
+        const reapplyLink = page
+          .locator("span.JobSectionMessage_content__DoAKw")
+          .filter({ hasText: "You have applied for this position" })
+          .locator('a:has-text("Reapply")')
+          .first();
 
-        if (reapplyCount > 0) {
-          applyLink = reapplyLinks.nth(1);
-          console.log("♻️ Found Reapply link.");
+        const isVisible = await reapplyLink.isVisible();
+        if (isVisible) {
+          await reapplyLink.scrollIntoViewIfNeeded(); // only if truly needed
+          await randomDelay();
+          applyLink = reapplyLink;
+          console.log("♻️ Clicked Reapply link.");
         } else {
-          console.log(`⚠️ No Apply or Reapply link found: ${jobUrl}`);
+          //add email here?
+          console.log("⚠️ Reapply link found but not visible.");
           await fs.appendFile(FAILED_LOG, jobUrl + "\n");
           continue;
         }
       }
+
+      /// Think this is running  regardless and failing!
 
       // Pick one — e.g., the second one (index 1), or first if unsure
       //const applyLink = applyLinks.nth(1); // adjust index as needed
@@ -224,6 +232,7 @@ async function applyToJobLinks(
 
       await randomDelay(2000, 4000);
     } catch (err) {
+      skippedScreeningLinks.push(jobUrl);
       console.error(`❌ Navigation or scraping failed for ${jobUrl}:`, err);
       await fs.appendFile(
         FAILED_LOG,
